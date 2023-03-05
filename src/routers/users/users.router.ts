@@ -1,8 +1,14 @@
 import { Router } from "express";
-import { createUserController, deleteUserController, listAllUsersController, updateUserController } from "../../controllers/user.controllers";
+import {
+  createUserController,
+  deleteUserController,
+  listAllUsersController,
+  updateUserController,
+} from "../../controllers/user.controllers";
 import ensureDataIsValidMiddleware from "../../middlewares/ensureDetails.middlewares";
 import ensureUserEmailExist from "../../middlewares/ensureEmailExist.middleware";
-import { userSchema } from "../../schemas/users.schemas";
+import ensureMovieIdExist from "../../middlewares/ensureIdExist.midddleware";
+import { userSchema, userUpdateSchema } from "../../schemas/users.schemas";
 
 const usersRoutes: Router = Router();
 
@@ -13,7 +19,13 @@ usersRoutes.post(
   createUserController
 );
 usersRoutes.get("", listAllUsersController);
-usersRoutes.patch("/:id", updateUserController);
-usersRoutes.delete("/:id", deleteUserController);
+usersRoutes.patch(
+  "/:id",
+  ensureMovieIdExist,
+  ensureDataIsValidMiddleware(userUpdateSchema),
+  ensureUserEmailExist,
+  updateUserController
+);
+usersRoutes.delete("/:id", ensureMovieIdExist, deleteUserController);
 
 export default usersRoutes;
