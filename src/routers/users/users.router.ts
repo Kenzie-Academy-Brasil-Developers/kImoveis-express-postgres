@@ -9,6 +9,7 @@ import ensureDataIsValidMiddleware from "../../middlewares/ensureDetails.middlew
 import ensureUserEmailExist from "../../middlewares/ensureEmailExist.middleware";
 import ensureMovieIdExist from "../../middlewares/ensureIdExist.midddleware";
 import { userSchema, userUpdateSchema } from "../../schemas/users.schemas";
+import ensureTokenIsValidMiddleware from "../../services/users/ensureTokenIsValid.middleware";
 
 const usersRoutes: Router = Router();
 
@@ -18,7 +19,7 @@ usersRoutes.post(
   ensureUserEmailExist,
   createUserController
 );
-usersRoutes.get("", listAllUsersController);
+usersRoutes.get("", ensureTokenIsValidMiddleware, listAllUsersController);
 usersRoutes.patch(
   "/:id",
   ensureMovieIdExist,
