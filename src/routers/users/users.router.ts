@@ -9,7 +9,7 @@ import ensureDataIsValidMiddleware from "../../middlewares/ensureDetails.middlew
 import ensureUserEmailExist from "../../middlewares/ensureEmailExist.middleware";
 import ensureMovieIdExist from "../../middlewares/ensureIdExist.midddleware";
 import { userSchema, userUpdateSchema } from "../../schemas/users.schemas";
-import ensureTokenIsValidMiddleware from "../../services/users/ensureTokenIsValid.middleware";
+import ensureTokenIsValidMiddleware from "../../middlewares/ensureTokenIsValid.middleware";
 
 const usersRoutes: Router = Router();
 
