@@ -12,12 +12,16 @@ const ensureUserEmailExist = async (
 ): Promise<void> => {
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
+  if (req.method === "PATCH" && !req.body.email) {
+    return next();
+  }
+
   const findUserEmail = await userRepository.findOneBy({
     email: req.body.email,
   });
 
   if (findUserEmail) {
-    throw new AppError("Email already exists.", 409);
+    throw new AppError("Email already exists", 409);
   }
 
   return next();

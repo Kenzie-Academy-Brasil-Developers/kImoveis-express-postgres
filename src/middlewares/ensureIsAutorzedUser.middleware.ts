@@ -5,17 +5,16 @@ import { User } from "../entities";
 import { AppError } from "../errors";
 import "express-async-errors";
 
-const ensureIsUser = async (
+const ensureIsAutorzedUser = async (
   req: Request,
   resp: Response,
   next: NextFunction
 ): Promise<void> => {
- 
-  if (Number(req.params.id) !== req.user.id) {
+  if (Number(req.params.id) === req.user.id || req.user.admin) {
+    return next();
+  } else {
     throw new AppError("Access denied", 403);
   }
-
-  return next();
 };
 
-export default ensureIsUser;
+export default ensureIsAutorzedUser;

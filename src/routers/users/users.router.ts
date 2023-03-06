@@ -11,7 +11,7 @@ import ensureUserIdExist from "../../middlewares/ensureIdExist.midddleware";
 import { userSchema, userUpdateSchema } from "../../schemas/users.schemas";
 import ensureTokenIsValidMiddleware from "../../middlewares/ensureTokenIsValid.middleware";
 import ensureUserIsAdmin from "../../middlewares/ensureIsAdmin.middleware";
-import ensureIsUser from "../../middlewares/ensureIsUser.middleware";
+import ensureIsAutorzedUser from "../../middlewares/ensureIsAutorzedUser.middleware";
 
 const usersRoutes: Router = Router();
 
@@ -21,21 +21,29 @@ usersRoutes.post(
   ensureUserEmailExist,
   createUserController
 );
-usersRoutes.get("", ensureTokenIsValidMiddleware, ensureUserIsAdmin, listAllUsersController);
+
+usersRoutes.get(
+  "",
+  ensureTokenIsValidMiddleware,
+  ensureUserIsAdmin,
+  listAllUsersController
+);
+
 usersRoutes.patch(
   "/:id",
   ensureTokenIsValidMiddleware,
   ensureUserIdExist,
-  ensureIsUser,
+  ensureIsAutorzedUser,
   ensureDataIsValidMiddleware(userUpdateSchema),
   ensureUserEmailExist,
   updateUserController
 );
+
 usersRoutes.delete(
   "/:id",
   ensureTokenIsValidMiddleware,
   ensureUserIdExist,
-  ensureIsUser,
+  ensureIsAutorzedUser,
   deleteUserController
 );
 
