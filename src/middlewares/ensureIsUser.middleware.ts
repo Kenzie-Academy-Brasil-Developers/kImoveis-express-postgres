@@ -5,22 +5,17 @@ import { User } from "../entities";
 import { AppError } from "../errors";
 import "express-async-errors";
 
-const ensureUserIdExist = async (
+const ensureIsUser = async (
   req: Request,
   resp: Response,
   next: NextFunction
 ): Promise<void> => {
-  const userRepository: Repository<User> = AppDataSource.getRepository(User);
-
-  const findUser = await userRepository.findOneBy({
-    id: parseInt(req.params.id),
-  });
-
-  if (!findUser) {
-    throw new AppError("User not found", 404);
+ 
+  if (Number(req.params.id) !== req.user.id) {
+    throw new AppError("Access denied", 403);
   }
 
   return next();
 };
 
-export default ensureUserIdExist;
+export default ensureIsUser;
