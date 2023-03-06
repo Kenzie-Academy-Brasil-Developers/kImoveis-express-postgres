@@ -6,6 +6,7 @@ import { AppError } from "../../errors";
 import "dotenv/config";
 import { Repository } from "typeorm";
 import { ILogin } from "../../interfaces/login.interface";
+import "express-async-errors";
 
 const createLoginService = async (loginData: ILogin): Promise<string> => {
   const userRepository: Repository<User> = AppDataSource.getRepository(User);

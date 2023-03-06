@@ -1,12 +1,10 @@
 import { FindManyOptions, Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { User } from "../../entities";
-import { AppError } from "../../errors";
 import { IAllUsersReturn } from "../../interfaces/users.interfaces";
 import { arrayUserSchema } from "../../schemas/users.schemas";
 
-const listAllUsersService = async ( data: any): Promise<IAllUsersReturn> => {
-
+const listAllUsersService = async (data: any): Promise<IAllUsersReturn> => {
   const { page, perPage, sort, order } = data;
 
   const userRepository: Repository<User> = AppDataSource.getRepository(User);

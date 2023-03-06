@@ -43,7 +43,7 @@ usersRoutes.delete(
   "/:id",
   ensureTokenIsValidMiddleware,
   ensureUserIdExist,
-  ensureIsAutorzedUser,
+  ensureUserIsAdmin,
   deleteUserController
 );
 

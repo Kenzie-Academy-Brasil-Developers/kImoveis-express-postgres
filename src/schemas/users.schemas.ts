@@ -32,17 +32,19 @@ const returnListUsersSchema = z.object({
   data: arrayUserSchema,
 });
 
-const userUpdateSchema = z.object({
-  name: z.string().min(3).max(45),
-  email: z.string().email().min(10).max(45),
-  password: z
-    .string()
-    .min(4)
-    .max(120)
-    .transform((pass) => {
-      return hashSync(pass, 10);
-    }),
-}).partial();
+const userUpdateSchema = z
+  .object({
+    name: z.string().min(3).max(45),
+    email: z.string().email().min(10).max(45),
+    password: z
+      .string()
+      .min(4)
+      .max(120)
+      .transform((pass) => {
+        return hashSync(pass, 10);
+      }),
+  })
+  .partial();
 
 export {
   userSchema,
