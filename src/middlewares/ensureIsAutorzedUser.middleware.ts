@@ -7,7 +7,8 @@ const ensureIsAutorzedUser = async (
   resp: Response,
   next: NextFunction
 ): Promise<void> => {
-  if (Number(req.params.id) === req.user.id || req.user.admin) {
+
+  if (Number(req.params.id) === req.user.sub|| req.user.admin) {
     return next();
   } else {
     throw new AppError("Access denied", 403);

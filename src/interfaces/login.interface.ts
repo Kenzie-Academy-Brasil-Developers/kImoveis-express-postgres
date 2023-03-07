@@ -3,4 +3,9 @@ import { createLoginSchema } from "../schemas/login.schema";
 
 type ILogin = z.infer<typeof createLoginSchema>;
 
-export { ILogin };
+interface IJwtPayload {
+  expiresIn: string;
+  subject: string;
+}
+
+export { ILogin, IJwtPayload };

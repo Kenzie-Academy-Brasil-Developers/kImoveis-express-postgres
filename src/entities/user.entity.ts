@@ -34,4 +34,4 @@ class User {
   deletedAt: string | Date | null;
 }
 
-export { User };
+export default User;
