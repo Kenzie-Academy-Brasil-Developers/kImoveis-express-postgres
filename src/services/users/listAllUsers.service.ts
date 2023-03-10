@@ -1,9 +1,8 @@
-import { FindManyOptions, Repository } from "typeorm";
+import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { User } from "../../entities";
 import {
-  IAllUsersReturn,
-  IArrayUsers,
+  IArrayUsers
 } from "../../interfaces/users.interfaces";
 import { arrayUserSchema } from "../../schemas/users.schemas";
 

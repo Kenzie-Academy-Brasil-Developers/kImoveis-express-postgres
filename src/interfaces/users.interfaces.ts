@@ -9,8 +9,7 @@ import {
 
 type IUser = z.infer<typeof userSchema>;
 type IUserReturn = z.infer<typeof returnUserSchema>;
-type IArrayUsers = z.infer<typeof arrayUserSchema>
-type IAllUsersReturn = z.infer<typeof returnListUsersSchema>;
+type IArrayUsers = z.infer<typeof arrayUserSchema>;
 type IUserUpdate = DeepPartial<IUser>;
 
-export { IUser, IUserReturn, IAllUsersReturn, IArrayUsers, IUserUpdate };
+export { IUser, IUserReturn, IArrayUsers, IUserUpdate };

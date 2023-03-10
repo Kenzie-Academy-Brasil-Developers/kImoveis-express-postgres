@@ -1,9 +1,7 @@
-import { FindManyOptions, Repository } from "typeorm";
+import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Category } from "../../entities";
-import {
-  IArrayCategories,
-} from "../../interfaces/categories.interfaces";
+import { IArrayCategories } from "../../interfaces/categories.interfaces";
 import { arrayCategoriesSchema } from "../../schemas/categories.schemas";
 
 const listAllCategoriesService = async (): Promise<IArrayCategories> => {

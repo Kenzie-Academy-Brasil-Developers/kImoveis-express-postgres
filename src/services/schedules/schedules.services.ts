@@ -1,14 +1,10 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
-import "express-async-errors";
-import {
-  ISchedulesRequest,
-  ISchedulesResponse,
-} from "../../interfaces/schedules.interfaces";
+import { ISchedulesRequest } from "../../interfaces/schedules.interfaces";
 import Schedule from "../../entities/schedules.entity";
 import { RealEstate, User } from "../../entities";
 import { AppError } from "../../errors";
-import { returnSchedulesSchema } from "../../schemas/schedules.schemas";
+import "express-async-errors";
 
 const createSchedulesService = async (
   data: ISchedulesRequest,
@@ -51,7 +47,10 @@ const createSchedulesService = async (
     .getOne();
 
   if (schedulesAlreadyExistsProperty) {
-    throw new AppError("Schedule to this real estate at this date and time already exists", 409);
+    throw new AppError(
+      "Schedule to this real estate at this date and time already exists",
+      409
+    );
   }
 
   const schedulesAlreadyExistsUser = await schedulesRepository
@@ -62,7 +61,10 @@ const createSchedulesService = async (
     .getOne();
 
   if (schedulesAlreadyExistsUser) {
-    throw new AppError("User schedule to this real estate at this date and time already exists", 409);
+    throw new AppError(
+      "User schedule to this real estate at this date and time already exists",
+      409
+    );
   }
 
   const schedule = schedulesRepository.create({

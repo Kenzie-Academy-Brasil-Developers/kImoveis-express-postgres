@@ -18,6 +18,6 @@ categoriesRoutes.post(
   createCategoryControllers
 );
 categoriesRoutes.get("", listAllCategoriesController);
-categoriesRoutes.get("/:id/realEstate")
+categoriesRoutes.get("/:id/realEstate");
 
 export default categoriesRoutes;

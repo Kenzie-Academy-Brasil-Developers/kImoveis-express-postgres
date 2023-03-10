@@ -7,6 +7,6 @@ import {
 
 type IRealEstateRequest = z.infer<typeof realEstateSchema>;
 type IRealEstateResponse = z.infer<typeof returnRealEstateSchema>;
-type IArrayRealEstate = z.infer<typeof arrayRealEstatesSchema>
+type IArrayRealEstate = z.infer<typeof arrayRealEstatesSchema>;
 
 export { IRealEstateRequest, IRealEstateResponse, IArrayRealEstate };

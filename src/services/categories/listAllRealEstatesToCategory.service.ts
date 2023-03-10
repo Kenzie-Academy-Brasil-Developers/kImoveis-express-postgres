@@ -2,7 +2,7 @@ import { AppDataSource } from "../../data-source";
 import { Category } from "../../entities";
 import { AppError } from "../../errors";
 
-const listCategoryService = async (id: number) => {
+const listAllRealEstatesToCategoryService = async (id: number) => {
   const categoryRepository = AppDataSource.getRepository(Category);
 
   const category = await categoryRepository.findOneBy({
@@ -16,4 +16,4 @@ const listCategoryService = async (id: number) => {
   return category;
 };
 
-export default listCategoryService;
+export default listAllRealEstatesToCategoryService;

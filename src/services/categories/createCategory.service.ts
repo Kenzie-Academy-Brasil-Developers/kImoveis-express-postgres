@@ -21,9 +21,9 @@ const createCategoryService = async (
   }
 
   const createdProperty = categoryRepository.create(data);
-  
+
   const newCategory = await categoryRepository.save(createdProperty);
-  
+
   return newCategory;
 };
 

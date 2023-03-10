@@ -25,13 +25,6 @@ const returnUserSchema = userSchema
 
 const arrayUserSchema = returnUserSchema.array();
 
-const returnListUsersSchema = z.object({
-  nextPage: optional(z.string().max(500)).nullable(),
-  prevPage: optional(z.string().max(500)).nullable(),
-  count: z.number().int(),
-  data: arrayUserSchema,
-});
-
 const userUpdateSchema = z
   .object({
     name: z.string().min(3).max(45),
@@ -46,10 +39,4 @@ const userUpdateSchema = z
   })
   .partial();
 
-export {
-  userSchema,
-  returnUserSchema,
-  arrayUserSchema,
-  returnListUsersSchema,
-  userUpdateSchema,
-};
+export { userSchema, returnUserSchema, arrayUserSchema, userUpdateSchema };

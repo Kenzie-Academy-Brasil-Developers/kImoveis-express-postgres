@@ -10,11 +10,4 @@ const returnCategorySchema = categorySchema.extend({
 
 const arrayCategoriesSchema = returnCategorySchema.array();
 
-const returnListCategoriesSchema = z.object({
-  nextPage: optional(z.string().max(500)).nullable(),
-  prevPage: optional(z.string().max(500)).nullable(),
-  count: z.number().int(),
-  data: arrayCategoriesSchema,
-});
-
-export { categorySchema, returnCategorySchema, arrayCategoriesSchema, returnListCategoriesSchema};
+export { categorySchema, returnCategorySchema, arrayCategoriesSchema };

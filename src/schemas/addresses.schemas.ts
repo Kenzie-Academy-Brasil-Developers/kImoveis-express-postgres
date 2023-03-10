@@ -14,11 +14,8 @@ const returnAddressSchema = addressSchema.extend({
 
 const arrayAddressesSchema = returnAddressSchema.array();
 
-const returnListAddressesSchema = z.object({
-  nextPage: optional(z.string().max(500)).nullable(),
-  prevPage: optional(z.string().max(500)).nullable(),
-  count: z.number().int(),
-  data: arrayAddressesSchema,
-});
-
-export { addressSchema, returnAddressSchema, arrayAddressesSchema, returnListAddressesSchema };
+export {
+  addressSchema,
+  returnAddressSchema,
+  arrayAddressesSchema
+};

@@ -9,16 +9,17 @@ const realEstateSchema = z.object({
   categoryId: z.number(),
 });
 
-const returnRealEstateSchema = realEstateSchema.omit({ categoryId: true }).extend({
-  id: z.number(),
-  sold: z.boolean(),
-  address: returnAddressSchema,
-  category: returnCategorySchema,
-  createdAt: z.string(),
-  updatedAt: z.string(),
-});
+const returnRealEstateSchema = realEstateSchema
+  .omit({ categoryId: true })
+  .extend({
+    id: z.number(),
+    sold: z.boolean(),
+    address: returnAddressSchema,
+    category: returnCategorySchema,
+    createdAt: z.string(),
+    updatedAt: z.string(),
+  });
 
 const arrayRealEstatesSchema = returnRealEstateSchema.array();
-
 
 export { realEstateSchema, returnRealEstateSchema, arrayRealEstatesSchema };

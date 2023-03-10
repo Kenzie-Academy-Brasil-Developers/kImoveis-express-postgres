@@ -15,7 +15,7 @@ const updateUserService = async (
   });
 
   const now = new Date().toISOString();
-  
+
   const user = userRepository.create({
     ...oldUserData,
     ...newUserData,

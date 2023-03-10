@@ -5,7 +5,7 @@ import {
   IRealEstateRequest,
   IRealEstateResponse,
 } from "../../interfaces/realEstate.interfaces";
-import listCategoryService from "../categories/listCategory.service";
+import listCategoryService from "../categories/listAllRealEstatesToCategory.service";
 import { returnRealEstateSchema } from "../../schemas/realEstate.schema";
 import createAddressesService from "../addresses/createAddresses.service";
 import { AppError } from "../../errors";
