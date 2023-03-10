@@ -18,11 +18,8 @@ realEstateRoutes.post(
   ensureDataIsValidMiddleware(realEstateSchema),
   createRealEstateControllers
 );
-realEstateRoutes.get(
-  "",
-  listAllRealEstateController
-);
+realEstateRoutes.get("", listAllRealEstateController);
 
-realEstateRoutes.get("/:id/realEstates", listRealEstatesByCategoryController)
+realEstateRoutes.get("/:id/realEstates", listRealEstatesByCategoryController);
 
 export default realEstateRoutes;

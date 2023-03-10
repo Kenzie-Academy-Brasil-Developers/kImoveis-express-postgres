@@ -1,7 +1,6 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { RealEstate } from "../../entities";
-import { arrayRealEstatesSchema } from "../../schemas/realEstate.schema";
 
 const listAllRealEstateService = async () => {
   const realEstateRepository: Repository<RealEstate> =
@@ -9,8 +8,8 @@ const listAllRealEstateService = async () => {
 
   const listUsers: Array<RealEstate> = await realEstateRepository.find({
     relations: {
-      address: true
-    }
+      address: true,
+    },
   });
 
   return listUsers;

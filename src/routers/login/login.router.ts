@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { createLoginController } from "../../controllers/login.controller";
-import ensureUserEmailExist from "../../middlewares/ensureEmailExist.middleware";
 import ensureDataIsValidMiddleware from "../../middlewares/ensureDetails.middlewares";
 import { createLoginSchema } from "../../schemas/login.schema";
 

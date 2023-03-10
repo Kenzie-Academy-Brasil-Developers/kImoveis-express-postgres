@@ -22,12 +22,19 @@ const returnRealEstateSchema = realEstateSchema
 
 const arrayRealEstatesSchema = returnRealEstateSchema.array();
 
-const manyRealEstateSchemaWithoutCategory = realEstateSchema.omit({
-  categoryId: true
-}).array()
+const manyRealEstateSchemaWithoutCategory = realEstateSchema
+  .omit({
+    categoryId: true,
+  })
+  .array();
 
 const returnRealEstatesByCategorySchema = returnRealEstateSchema.extend({
- realEstates : manyRealEstateSchemaWithoutCategory
-})
+  realEstates: manyRealEstateSchemaWithoutCategory,
+});
 
-export { realEstateSchema, returnRealEstateSchema, arrayRealEstatesSchema, returnRealEstatesByCategorySchema };
+export {
+  realEstateSchema,
+  returnRealEstateSchema,
+  arrayRealEstatesSchema,
+  returnRealEstatesByCategorySchema,
+};

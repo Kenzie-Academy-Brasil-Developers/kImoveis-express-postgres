@@ -16,7 +16,7 @@ const updateUserService = async (
 
   const user = userRepository.create({
     ...oldUserData,
-    ...newUserData
+    ...newUserData,
   });
 
   await userRepository.save(user);

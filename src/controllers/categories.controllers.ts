@@ -25,4 +25,8 @@ const listRealEstatesByCategoryController = async (
   return res.json(realEstates);
 };
 
-export { createCategoryControllers, listAllCategoriesController, listRealEstatesByCategoryController };
+export {
+  createCategoryControllers,
+  listAllCategoriesController,
+  listRealEstatesByCategoryController,
+};

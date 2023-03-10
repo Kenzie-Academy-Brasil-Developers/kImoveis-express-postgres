@@ -1,7 +1,6 @@
 import { AppDataSource } from "../../data-source";
 import { Category, RealEstate } from "../../entities";
 import { AppError } from "../../errors";
-import { returnRealEstatesByCategorySchema } from "../../schemas/realEstate.schema";
 
 const listRealEstatesbyCategoryService = async (categoryId: number) => {
   const categoryRepository = AppDataSource.getRepository(Category);
@@ -14,7 +13,7 @@ const listRealEstatesbyCategoryService = async (categoryId: number) => {
   if (!categoryExists) {
     throw new AppError("Category not found", 404);
   }
-  
+
   const listRealEstates = await realEstateRepository.find({
     where: { category: { id: categoryId } },
   });

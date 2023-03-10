@@ -1,5 +1,4 @@
 import { Repository } from "typeorm";
-import { boolean } from "zod";
 import { AppDataSource } from "../../data-source";
 import { User } from "../../entities";
 import { IUser, IUserReturn } from "../../interfaces/users.interfaces";
