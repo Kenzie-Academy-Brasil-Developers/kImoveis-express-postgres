@@ -20,7 +20,6 @@ realEstateRoutes.post(
 );
 realEstateRoutes.get(
   "",
-  ensureTokenIsValidMiddleware,
   listAllRealEstateController
 );
 

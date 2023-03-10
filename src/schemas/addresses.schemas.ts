@@ -5,7 +5,7 @@ const addressSchema = z.object({
   zipCode: z.string().max(8),
   number: z.string().max(7).nullable().optional(),
   city: z.string().max(20),
-  state: z.string().length(2),
+  state: z.string().max(2),
 });
 
 const returnAddressSchema = addressSchema.extend({

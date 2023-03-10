@@ -17,6 +17,12 @@ const createSchedulesService = async (
   if (parseInt(splitHour[0]) >= 18 || parseInt(splitHour[0]) < 8) {
     throw new AppError("Invalid hour, available times are 8AM to 18PM", 400);
   }
+
+  const weekday = new Date(date).getDay();
+  if (weekday === 6 || weekday === 0) {
+    throw new AppError("Invalid date, work days are monday to friday", 400);
+  }
+
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
   const realEstateRepository: Repository<RealEstate> =
     AppDataSource.getRepository(RealEstate);
