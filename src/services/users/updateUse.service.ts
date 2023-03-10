@@ -14,12 +14,9 @@ const updateUserService = async (
     id: idUser,
   });
 
-  const now = new Date().toISOString();
-
   const user = userRepository.create({
     ...oldUserData,
-    ...newUserData,
-    updatedAt: now,
+    ...newUserData
   });
 
   await userRepository.save(user);

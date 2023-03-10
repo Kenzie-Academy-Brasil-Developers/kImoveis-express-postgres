@@ -3,7 +3,6 @@ import { DeepPartial } from "typeorm";
 import {
   userSchema,
   returnUserSchema,
-  returnListUsersSchema,
   arrayUserSchema,
 } from "../schemas/users.schemas";
 
