@@ -22,4 +22,12 @@ const returnRealEstateSchema = realEstateSchema
 
 const arrayRealEstatesSchema = returnRealEstateSchema.array();
 
-export { realEstateSchema, returnRealEstateSchema, arrayRealEstatesSchema };
+const manyRealEstateSchemaWithoutCategory = realEstateSchema.omit({
+  categoryId: true
+}).array()
+
+const returnRealEstatesByCategorySchema = returnRealEstateSchema.extend({
+ realEstates : manyRealEstateSchemaWithoutCategory
+})
+
+export { realEstateSchema, returnRealEstateSchema, arrayRealEstatesSchema, returnRealEstatesByCategorySchema };

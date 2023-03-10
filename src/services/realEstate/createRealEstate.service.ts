@@ -5,7 +5,7 @@ import {
   IRealEstateRequest,
   IRealEstateResponse,
 } from "../../interfaces/realEstate.interfaces";
-import listCategoryService from "../categories/listAllRealEstatesToCategory.service";
+import listCategoryService from "../categories/listRealEstatesbyCategory.service";
 import { returnRealEstateSchema } from "../../schemas/realEstate.schema";
 import createAddressesService from "../addresses/createAddresses.service";
 import { AppError } from "../../errors";
@@ -32,7 +32,6 @@ const createRealEstateService = async (
     throw new AppError("Address already exists", 409);
   }
 
-  const categoryReturn: Category = await listCategoryService(categoryId);
   const dataAddress = await createAddressesService(address);
   const realEstateRepository: Repository<RealEstate> =
     AppDataSource.getRepository(RealEstate);
@@ -50,7 +49,7 @@ const createRealEstateService = async (
   const realEstate: RealEstate = realEstateRepository.create({
     value,
     size,
-    category: categoryReturn,
+    category: category,
     address: dataAddress,
   });
 

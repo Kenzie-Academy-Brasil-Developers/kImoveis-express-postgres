@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { listRealEstatesByCategoryController } from "../../controllers/categories.controllers";
 import {
   createRealEstateControllers,
   listAllRealEstateController,
@@ -22,5 +23,7 @@ realEstateRoutes.get(
   ensureTokenIsValidMiddleware,
   listAllRealEstateController
 );
+
+realEstateRoutes.get("/:id/realEstates", listRealEstatesByCategoryController)
 
 export default realEstateRoutes;

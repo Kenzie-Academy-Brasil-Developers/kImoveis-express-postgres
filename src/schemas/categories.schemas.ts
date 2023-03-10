@@ -10,4 +10,6 @@ const returnCategorySchema = categorySchema.extend({
 
 const arrayCategoriesSchema = returnCategorySchema.array();
 
+
+
 export { categorySchema, returnCategorySchema, arrayCategoriesSchema };
