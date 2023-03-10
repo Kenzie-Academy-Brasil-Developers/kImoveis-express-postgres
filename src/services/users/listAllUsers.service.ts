@@ -1,10 +1,13 @@
 import { FindManyOptions, Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { User } from "../../entities";
-import { IAllUsersReturn } from "../../interfaces/users.interfaces";
+import {
+  IAllUsersReturn,
+  IArrayUsers,
+} from "../../interfaces/users.interfaces";
 import { arrayUserSchema } from "../../schemas/users.schemas";
 
-const listAllUsersService = async (data: any): Promise<IAllUsersReturn> => {
+const listAllUsersService = async (data: any): Promise<IArrayUsers> => {
   const { page, perPage, sort, order } = data;
 
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
@@ -39,22 +42,7 @@ const listAllUsersService = async (data: any): Promise<IAllUsersReturn> => {
 
   const totalPages = Math.ceil(count / perPageResult);
 
-  const result: IAllUsersReturn = {
-    nextPage:
-      pageResult < totalPages
-        ? `http://localhost:3000/users?page=${
-            pageResult + 1
-          }&perPage=${perPageResult}`
-        : null,
-    prevPage:
-      pageResult > 1
-        ? `http://localhost:3000/users?page=${
-            pageResult - 1
-          }&perPage=${perPageResult}`
-        : null,
-    count,
-    data: arrayUserSchema.parse(users),
-  };
+  const result = arrayUserSchema.parse(users);
 
   return result;
 };

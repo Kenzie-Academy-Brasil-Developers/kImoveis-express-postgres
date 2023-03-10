@@ -10,7 +10,7 @@ const listCategoryService = async (id: number) => {
   });
 
   if (!category) {
-    throw new AppError("Invalid Category ID", 404);
+    throw new AppError("Category not found", 404);
   }
 
   return category;

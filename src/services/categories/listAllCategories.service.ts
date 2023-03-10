@@ -1,12 +1,12 @@
 import { FindManyOptions, Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Category } from "../../entities";
-import { IAllCategoriesReturn } from "../../interfaces/categories.interfaces";
+import { IAllCategoriesReturn, IArrayCategories } from "../../interfaces/categories.interfaces";
 import { arrayCategoriesSchema } from "../../schemas/categories.schemas";
 
 const listAllCategoriesService = async (
   data: any
-): Promise<IAllCategoriesReturn> => {
+): Promise<IArrayCategories> => {
   const { page, perPage } = data;
 
   const categoryRepository: Repository<Category> =
@@ -32,23 +32,9 @@ const listAllCategoriesService = async (
 
   const totalPages = Math.ceil(count / perPageResult);
 
-  const result: IAllCategoriesReturn = {
-    nextPage:
-      pageResult < totalPages
-        ? `http://localhost:3000/categories?page=${
-            pageResult + 1
-          }&perPage=${perPageResult}`
-        : null,
-    prevPage:
-      pageResult > 1
-        ? `http://localhost:3000/categories?page=${
-            pageResult - 1
-          }&perPage=${perPageResult}`
-        : null,
-    count,
-    data: arrayCategoriesSchema.parse(categories),
-  };
+  const result = arrayCategoriesSchema.parse(categories);
 
+  
   return result;
 };
 

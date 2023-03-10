@@ -27,7 +27,6 @@ const createRealEstateService = async (
       zipCode: address.zipCode,
     },
   });
-  console.log(addressExists);
 
   if (addressExists) {
     throw new AppError("Address already exists", 409);
@@ -37,6 +36,16 @@ const createRealEstateService = async (
   const dataAddress = await createAddressesService(address);
   const realEstateRepository: Repository<RealEstate> =
     AppDataSource.getRepository(RealEstate);
+
+  const categoryRepository = AppDataSource.getRepository(Category);
+
+  const category = await categoryRepository.findOneBy({
+    id: categoryId,
+  });
+
+  if (!category) {
+    throw new AppError("Category not found", 404);
+  }
 
   const realEstate: RealEstate = realEstateRepository.create({
     value,

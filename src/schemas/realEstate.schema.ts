@@ -18,4 +18,7 @@ const returnRealEstateSchema = realEstateSchema.omit({ categoryId: true }).exten
   updatedAt: z.string(),
 });
 
-export { realEstateSchema, returnRealEstateSchema };
+const arrayRealEstatesSchema = returnRealEstateSchema.array();
+
+
+export { realEstateSchema, returnRealEstateSchema, arrayRealEstatesSchema };

@@ -11,7 +11,7 @@ const ensureIsAutorzedUser = async (
   if (Number(req.params.id) === req.user.sub|| req.user.admin) {
     return next();
   } else {
-    throw new AppError("Access denied", 403);
+    throw new AppError("Insufficient permission", 403);
   }
 };
 

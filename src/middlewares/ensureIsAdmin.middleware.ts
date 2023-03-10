@@ -8,7 +8,7 @@ const ensureUserIsAdmin = async (
   next: NextFunction
 ): Promise<void> => {
   if (!req.user.admin) {
-    throw new AppError("Not is admin", 403);
+    throw new AppError("Insufficient permission", 403);
   }
 
   return next();
