@@ -6,12 +6,16 @@ import User from "./user.entity";
 export class Schedule {
   @PrimaryGeneratedColumn("increment")
   id: string;
+
   @Column({ type: "date" })
   date: string;
+
   @Column({ type: "time" })
   hour: string;
+
   @ManyToOne(() => RealEstate, (p) => p.id)
   realEstate: RealEstate;
+  
   @ManyToOne(() => User, (u) => u.id)
   user: User;
 }

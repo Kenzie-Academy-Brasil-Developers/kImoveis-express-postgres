@@ -7,7 +7,9 @@ import { arrayCategoriesSchema } from "../../schemas/categories.schemas";
 const listAllCategoriesService = async (): Promise<IArrayCategories> => {
   const categoryRepository: Repository<Category> =
     AppDataSource.getRepository(Category);
+
   const listCategory: Array<Category> = await categoryRepository.find();
+
   const categories = arrayCategoriesSchema.parse(listCategory);
   return categories;
 };
