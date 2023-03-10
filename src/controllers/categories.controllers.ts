@@ -8,7 +8,7 @@ const createCategoryControllers = async (req: Request, res: Response) => {
 };
 
 const listAllCategoriesController = async (req: Request, res: Response) => {
-  const categories = await listAllCategoriesService(req.query);
+  const categories = await listAllCategoriesService();
 
   return res.json(categories);
 };

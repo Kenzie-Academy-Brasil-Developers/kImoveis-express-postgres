@@ -19,7 +19,7 @@ const createSchedulesService = async (
   const splitHour = hour.split(":");
 
   if (parseInt(splitHour[0]) >= 18 || parseInt(splitHour[0]) < 8) {
-    throw new AppError("Invalid Hour", 400);
+    throw new AppError("Invalid hour, available times are 8AM to 18PM", 400);
   }
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
   const realEstateRepository: Repository<RealEstate> =
@@ -40,7 +40,7 @@ const createSchedulesService = async (
   });
 
   if (!findRealEstate) {
-    throw new AppError("Real Estate not found", 404);
+    throw new AppError("RealEstate not found", 404);
   }
 
   const schedulesAlreadyExistsProperty = await schedulesRepository
@@ -51,7 +51,7 @@ const createSchedulesService = async (
     .getOne();
 
   if (schedulesAlreadyExistsProperty) {
-    throw new AppError("Schedules Already Exists", 409);
+    throw new AppError("Schedule to this real estate at this date and time already exists", 409);
   }
 
   const schedulesAlreadyExistsUser = await schedulesRepository
@@ -62,7 +62,7 @@ const createSchedulesService = async (
     .getOne();
 
   if (schedulesAlreadyExistsUser) {
-    throw new AppError("Hour Already Exists", 409);
+    throw new AppError("User schedule to this real estate at this date and time already exists", 409);
   }
 
   const schedule = schedulesRepository.create({

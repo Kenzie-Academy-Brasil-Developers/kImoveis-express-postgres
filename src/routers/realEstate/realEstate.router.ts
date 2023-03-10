@@ -18,6 +18,10 @@ realEstateRoutes.post(
   ensureDataIsValidMiddleware(realEstateSchema),
   createRealEstateControllers
 );
-realEstateRoutes.get("", listAllRealEstateController);
+realEstateRoutes.get(
+  "",
+  ensureTokenIsValidMiddleware,
+  listAllRealEstateController
+);
 
 export default realEstateRoutes;
