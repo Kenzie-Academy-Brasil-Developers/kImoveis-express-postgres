@@ -17,7 +17,7 @@ const createAddressesService = async (
 
   await addressesRepository.save(address);
 
-  const newAddress = returnAddressSchema.parse(address);
+  const newAddress: IAddressResponse = returnAddressSchema.parse(address);
 
   return newAddress;
 };

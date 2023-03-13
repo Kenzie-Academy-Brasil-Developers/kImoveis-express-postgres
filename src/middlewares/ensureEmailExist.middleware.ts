@@ -16,7 +16,7 @@ const ensureUserEmailExist = async (
     return next();
   }
 
-  const findUserEmail = await userRepository.findOneBy({
+  const findUserEmail: User | null = await userRepository.findOneBy({
     email: req.body.email,
   });
 

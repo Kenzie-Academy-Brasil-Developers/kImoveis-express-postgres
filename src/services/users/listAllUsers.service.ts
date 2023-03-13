@@ -6,8 +6,11 @@ import { arrayUserSchema } from "../../schemas/users.schemas";
 
 const listAllUsersService = async (): Promise<IArrayUsers> => {
   const usersRepository: Repository<User> = AppDataSource.getRepository(User);
+
   const listUsers: Array<User> = await usersRepository.find();
-  const users = arrayUserSchema.parse(listUsers);
+
+  const users: IArrayUsers = arrayUserSchema.parse(listUsers);
+
   return users;
 };
 

@@ -10,7 +10,9 @@ const listAllCategoriesService = async (): Promise<IArrayCategories> => {
 
   const listCategory: Array<Category> = await categoryRepository.find();
 
-  const categories = arrayCategoriesSchema.parse(listCategory);
+  const categories: IArrayCategories =
+    arrayCategoriesSchema.parse(listCategory);
+
   return categories;
 };
 

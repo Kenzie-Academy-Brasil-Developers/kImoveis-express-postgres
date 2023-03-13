@@ -9,10 +9,12 @@ import "express-async-errors";
 const createSchedulesService = async (
   data: ISchedulesRequest,
   userId: number
-): Promise<any> => {
+): Promise<{
+  message: string;
+}> => {
   const { date, hour, realEstateId } = data;
 
-  const splitHour = hour.split(":");
+  const splitHour: string[] = hour.split(":");
 
   if (parseInt(splitHour[0]) >= 18 || parseInt(splitHour[0]) < 8) {
     throw new AppError("Invalid hour, available times are 8AM to 18PM", 400);
@@ -24,12 +26,14 @@ const createSchedulesService = async (
   }
 
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
+
   const realEstateRepository: Repository<RealEstate> =
     AppDataSource.getRepository(RealEstate);
+
   const schedulesRepository: Repository<Schedule> =
     AppDataSource.getRepository(Schedule);
 
-  const findUser = await userRepository.findOneBy({
+  const findUser: User | null = await userRepository.findOneBy({
     id: userId,
   });
 
@@ -37,20 +41,24 @@ const createSchedulesService = async (
     throw new AppError("User not found", 404);
   }
 
-  const findRealEstate = await realEstateRepository.findOneBy({
-    id: realEstateId,
-  });
+  const findRealEstate: RealEstate | null =
+    await realEstateRepository.findOneBy({
+      id: realEstateId,
+    });
 
   if (!findRealEstate) {
     throw new AppError("RealEstate not found", 404);
   }
 
-  const schedulesAlreadyExistsProperty = await schedulesRepository
-    .createQueryBuilder("schedules_users_properties")
-    .where("schedules_users_properties.realEstate = :id", { id: realEstateId })
-    .andWhere("schedules_users_properties.date = :date", { date: date })
-    .andWhere("schedules_users_properties.hour = :hour", { hour: hour })
-    .getOne();
+  const schedulesAlreadyExistsProperty: Schedule | null =
+    await schedulesRepository
+      .createQueryBuilder("schedules_users_properties")
+      .where("schedules_users_properties.realEstate = :id", {
+        id: realEstateId,
+      })
+      .andWhere("schedules_users_properties.date = :date", { date: date })
+      .andWhere("schedules_users_properties.hour = :hour", { hour: hour })
+      .getOne();
 
   if (schedulesAlreadyExistsProperty) {
     throw new AppError(
@@ -59,7 +67,7 @@ const createSchedulesService = async (
     );
   }
 
-  const schedulesAlreadyExistsUser = await schedulesRepository
+  const schedulesAlreadyExistsUser: Schedule | null = await schedulesRepository
     .createQueryBuilder("schedules_users_properties")
     .where("schedules_users_properties.userId = :id", { id: userId })
     .andWhere("schedules_users_properties.date = :date", { date: date })
@@ -73,7 +81,7 @@ const createSchedulesService = async (
     );
   }
 
-  const schedule = schedulesRepository.create({
+  const schedule: Schedule = schedulesRepository.create({
     date,
     hour,
     realEstate: findRealEstate,

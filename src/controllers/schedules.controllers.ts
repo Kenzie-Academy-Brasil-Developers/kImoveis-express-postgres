@@ -2,7 +2,10 @@ import { Request, Response } from "express";
 import createSchedulesService from "../services/schedules/createSchedules.services";
 import listAllScheduleByRealEstateIdService from "../services/schedules/listAllRealEstatesBySchedules.service";
 
-const createSchedulesControllers = async (req: Request, res: Response) => {
+const createSchedulesControllers = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
   const dataReq = req.body;
   const userId = req.user.sub;
   const data = await createSchedulesService(dataReq, userId);
@@ -12,7 +15,7 @@ const createSchedulesControllers = async (req: Request, res: Response) => {
 const listAllScheduleByRealEstateIdController = async (
   req: Request,
   res: Response
-) => {
+): Promise<Response> => {
   const data = await listAllScheduleByRealEstateIdService(
     Number(req.params.id)
   );

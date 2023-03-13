@@ -23,7 +23,7 @@ const createUserService = async (userData: IUser): Promise<IUserReturn> => {
 
   await userRepository.save(user);
 
-  const newUser = returnUserSchema.parse(user);
+  const newUser: IUserReturn = returnUserSchema.parse(user);
 
   return newUser;
 };

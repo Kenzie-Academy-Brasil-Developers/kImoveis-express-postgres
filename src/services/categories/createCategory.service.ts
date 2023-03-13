@@ -1,3 +1,4 @@
+import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import Category from "../../entities/categories.entity";
 import { AppError } from "../../errors";
@@ -10,19 +11,21 @@ const createCategoryService = async (
   data: ICategoryRequest
 ): Promise<ICategoryResponse> => {
   const { name } = data;
-  const categoryRepository = AppDataSource.getRepository(Category);
+  const categoryRepository: Repository<Category> =
+    AppDataSource.getRepository(Category);
 
-  const verifyCategoryExists = await categoryRepository.findOneBy({
-    name: name,
-  });
+  const verifyCategoryExists: Category | null =
+    await categoryRepository.findOneBy({
+      name: name,
+    });
 
   if (verifyCategoryExists) {
     throw new AppError("Category already exists", 409);
   }
 
-  const createdProperty = categoryRepository.create(data);
+  const createdProperty: Category | null = categoryRepository.create(data);
 
-  const newCategory = await categoryRepository.save(createdProperty);
+  const newCategory: Category = await categoryRepository.save(createdProperty);
 
   return newCategory;
 };

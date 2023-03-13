@@ -12,7 +12,7 @@ const ensureUserIdExist = async (
 ): Promise<void> => {
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
-  const findUser = await userRepository.findOneBy({
+  const findUser: User | null = await userRepository.findOneBy({
     id: parseInt(req.params.id),
   });
 

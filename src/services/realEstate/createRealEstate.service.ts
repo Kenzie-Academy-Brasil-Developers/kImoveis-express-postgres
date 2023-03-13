@@ -10,6 +10,7 @@ import { returnRealEstateSchema } from "../../schemas/realEstate.schema";
 import createAddressesService from "../addresses/createAddresses.service";
 import { AppError } from "../../errors";
 import "express-async-errors";
+import { IAddressResponse } from "../../interfaces/addresses.interfaces";
 
 const createRealEstateService = async (
   data: IRealEstateRequest
@@ -19,7 +20,7 @@ const createRealEstateService = async (
   const addressesRepository: Repository<Address> =
     AppDataSource.getRepository(Address);
 
-  const addressExists = await addressesRepository.findOne({
+  const addressExists: Address | null = await addressesRepository.findOne({
     where: {
       state: address.state,
       city: address.city,
@@ -32,13 +33,17 @@ const createRealEstateService = async (
     throw new AppError("Address already exists", 409);
   }
 
-  const dataAddress = await createAddressesService(address);
+  const dataAddress: IAddressResponse | null = await createAddressesService(
+    address
+  );
+
   const realEstateRepository: Repository<RealEstate> =
     AppDataSource.getRepository(RealEstate);
 
-  const categoryRepository = AppDataSource.getRepository(Category);
+  const categoryRepository: Repository<Category> =
+    AppDataSource.getRepository(Category);
 
-  const category = await categoryRepository.findOneBy({
+  const category: Category | null = await categoryRepository.findOneBy({
     id: categoryId,
   });
 
@@ -55,7 +60,8 @@ const createRealEstateService = async (
 
   await realEstateRepository.save(realEstate);
 
-  const newRealEstate = returnRealEstateSchema.parse(realEstate);
+  const newRealEstate: IRealEstateResponse =
+    returnRealEstateSchema.parse(realEstate);
 
   return newRealEstate;
 };

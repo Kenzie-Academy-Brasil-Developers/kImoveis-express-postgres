@@ -10,18 +10,18 @@ const updateUserService = async (
 ): Promise<IUserReturn> => {
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
-  const oldUserData = await userRepository.findOneBy({
+  const oldUserData: User | null = await userRepository.findOneBy({
     id: idUser,
   });
 
-  const user = userRepository.create({
+  const user: User = userRepository.create({
     ...oldUserData,
     ...newUserData,
   });
 
   await userRepository.save(user);
 
-  const updatedUser = returnUserSchema.parse(user);
+  const updatedUser: IUserReturn = returnUserSchema.parse(user);
 
   return updatedUser;
 };

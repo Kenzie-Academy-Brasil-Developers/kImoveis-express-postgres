@@ -1,12 +1,18 @@
+import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Category, RealEstate } from "../../entities";
 import { AppError } from "../../errors";
 
-const listRealEstatesbyCategoryService = async (categoryId: number) => {
-  const categoryRepository = AppDataSource.getRepository(Category);
-  const realEstateRepository = AppDataSource.getRepository(RealEstate);
+const listRealEstatesbyCategoryService = async (
+  categoryId: number
+): Promise<Category | null> => {
+  const categoryRepository: Repository<Category> =
+    AppDataSource.getRepository(Category);
 
-  const categoryExists = await categoryRepository.findOne({
+  const realEstateRepository: Repository<RealEstate> =
+    AppDataSource.getRepository(RealEstate);
+
+  const categoryExists: Category | null = await categoryRepository.findOne({
     where: { id: categoryId },
   });
 
@@ -14,7 +20,7 @@ const listRealEstatesbyCategoryService = async (categoryId: number) => {
     throw new AppError("Category not found", 404);
   }
 
-  const listRealEstates = await realEstateRepository.find({
+  const listRealEstates: RealEstate[] = await realEstateRepository.find({
     where: { category: { id: categoryId } },
   });
 
@@ -22,7 +28,7 @@ const listRealEstatesbyCategoryService = async (categoryId: number) => {
     throw new AppError("RealEstates not found", 404);
   }
 
-  const categoryAndList = await categoryRepository.findOne({
+  const categoryAndList: Category | null = await categoryRepository.findOne({
     where: { id: categoryId },
     relations: {
       realEstate: true,
